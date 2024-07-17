@@ -1,3 +1,5 @@
+import { getNonceValue } from 'src/helper';
+
 /*
  * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  This is a starter component and can be deleted.
@@ -9,6 +11,7 @@ export function NxWelcome({ title }: { title: string }) {
   return (
     <>
       <style
+        nonce={getNonceValue() || ''}
         dangerouslySetInnerHTML={{
           __html: `
     html {
