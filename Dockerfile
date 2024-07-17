@@ -7,13 +7,13 @@ FROM node:lts AS development
 WORKDIR /app
 
 # 
-COPY /test/package.json /app/package.json
-COPY /test/package-lock.json /app/package-lock.json
+COPY /package.json /app/package.json
+COPY /package-lock.json /app/package-lock.json
 
 # Same as npm install
 RUN npm i
 
-COPY /test /app
+COPY . /app
 
 ENV CI=true
 ENV PORT=3000
@@ -27,6 +27,7 @@ RUN npm run build
 FROM nginx:alpine
 
 # Copy config nginx
+RUN sed -i '1iload_module modules/ngx_http_js_module.so; \n' /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY crypto.js /etc/nginx/script/crypto.js
 
