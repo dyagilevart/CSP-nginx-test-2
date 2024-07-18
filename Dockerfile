@@ -29,7 +29,7 @@ FROM nginx:alpine
 # Copy config nginx
 RUN sed -i '1iload_module modules/ngx_http_js_module.so; \n' /etc/nginx/nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
-COPY crypto.js /etc/nginx/script/crypto.js
+COPY script.js /etc/nginx/script/script.js
 
 WORKDIR /usr/share/nginx/html
 
